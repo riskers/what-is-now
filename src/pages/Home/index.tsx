@@ -1,5 +1,5 @@
-import Taro, { Component, Config } from '@tarojs/taro'
-import { View, Text } from '@tarojs/components'
+import Taro, { Component } from '@tarojs/taro'
+import { View } from '@tarojs/components'
 import { AtList, AtListItem, AtToast } from 'taro-ui'
 import Q from '../../utils/Q'
 import { formatTime } from '../../utils/helpers'
@@ -44,7 +44,6 @@ export default class Index extends Component<{}, IState> {
 
     Q(queryTime)
       .then((res) => {
-        console.log(res)
         const list = res.map((item) => {
           return {
             art: item.art,
@@ -83,21 +82,23 @@ export default class Index extends Component<{}, IState> {
           现在是 {queryTime}
         </View>
 
-        <AtList>
-          {
-            list.map((item: IWhen) => {
-              return (
-                <AtListItem
-                  key={item.id}
-                  arrow='right'
-                  note={item.author}
-                  title={item.art}
-                  extraText={item.author}
-                />
-              )
-            })
-          }
-        </AtList>
+        {
+          list.length && <AtList>
+            {
+              list.map((item: IWhen) => {
+                return (
+                  <AtListItem
+                    key={item.id}
+                    arrow='right'
+                    note={item.author}
+                    title={item.art}
+                    extraText='查看详情'
+                  />
+                )
+              })
+            }
+          </AtList>
+        }
 
         <AtToast
           text={err}
@@ -108,4 +109,3 @@ export default class Index extends Component<{}, IState> {
     )
   }
 }
-
