@@ -1,4 +1,6 @@
 dist/
 .temp/
 .rn_temp/
+.vscode
 node_modules/
+src/bomb.config.ts

@@ -1,34 +1,109 @@
 import Taro, { Component, Config } from '@tarojs/taro'
 import { View, Text } from '@tarojs/components'
+import { AtList, AtListItem, AtToast } from 'taro-ui'
+import Q from '../../utils/Q'
+import { formatTime } from '../../utils/helpers'
 import './index.less'
 
-export default class Index extends Component {
+interface IWhen {
+  id: string;
+  time: string;
+  art: string;
+  author: string;
+  comment: string;
+  source: string;
+}
 
-  /**
-   * 指定config的类型声明为: Taro.Config
-   *
-   * 由于 typescript 对于 object 类型推导只能推出 Key 的基本类型
-   * 对于像 navigationBarTextStyle: 'black' 这样的推导出的类型是 string
-   * 提示和声明 navigationBarTextStyle: 'black' | 'white' 类型冲突, 需要显示声明类型
-   */
-  config: Config = {
-    navigationBarTitleText: '首页'
+interface IState {
+  queryTime: string;
+  list: IWhen[];
+  err: string;
+}
+
+export default class Index extends Component<{}, IState> {
+  static options = {
+    addGlobalClass: true
   }
 
-  componentWillMount () { }
+  constructor(props) {
+    super(props)
 
-  componentDidMount () { }
+    this.state = {
+      queryTime: '',
+      list: [],
+      err: '',
+    }
+  }
 
-  componentWillUnmount () { }
+  componentDidMount() {
+    const now: Date = new Date()
+    const hours = now.getHours()
+    const minutes = now.getMinutes()
 
-  componentDidShow () { }
+    const queryTime = formatTime(hours, minutes)
 
-  componentDidHide () { }
+    Q(queryTime)
+      .then((res) => {
+        console.log(res)
+        const list = res.map((item) => {
+          return {
+            art: item.art,
+            author: item.author,
+            comment: item.comment,
+            id: item.objectId,
+            source: item.source,
+            time: item.time,
+          }
+        })
+
+        this.setState({
+          list,
+        })
+      }).catch(() => {
+        this.setState({
+          err: '网络错误'
+        })
+      })
+
+    this.setState({
+      queryTime,
+    })
+  }
 
   render () {
+    const {
+      queryTime,
+      list,
+      err,
+    } = this.state
+
     return (
       <View className='index'>
-        <Text>Hello world!</Text>
+        <View className='main-title'>
+          现在是 {queryTime}
+        </View>
+
+        <AtList>
+          {
+            list.map((item: IWhen) => {
+              return (
+                <AtListItem
+                  key={item.id}
+                  arrow='right'
+                  note={item.author}
+                  title={item.art}
+                  extraText={item.author}
+                />
+              )
+            })
+          }
+        </AtList>
+
+        <AtToast
+          text={err}
+          icon='close-circle'
+          isOpened={err.length !== 0}
+        />
       </View>
     )
   }
