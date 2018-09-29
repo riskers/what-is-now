@@ -201,6 +201,10 @@
   version "4.14.116"
   resolved "https://registry.npmjs.org/@types/lodash/-/lodash-4.14.116.tgz#5ccf215653e3e8c786a58390751033a9adca0eb9"
 
+"@types/query-string@^6.1.0":
+  version "6.1.0"
+  resolved "https://registry.npmjs.org/@types/query-string/-/query-string-6.1.0.tgz#5f721f9503bdf517d474c66cf4423da5dd2d5698"
+
 "@types/react@16.3.14":
   version "16.3.14"
   resolved "https://registry.npmjs.org/@types/react/-/react-16.3.14.tgz#f90ac6834de172e13ecca430dcb6814744225d36"
@@ -5005,6 +5009,13 @@ qs@~6.5.1, qs@~6.5.2:
   version "6.5.2"
   resolved "https://registry.npmjs.org/qs/-/qs-6.5.2.tgz#cb3ae806e8740444584ef154ce8ee98d403f3e36"
 
+query-string@^6.1.0:
+  version "6.1.0"
+  resolved "https://registry.npmjs.org/query-string/-/query-string-6.1.0.tgz#01e7d69f6a0940dac67a937d6c6325647aa4532a"
+  dependencies:
+    decode-uri-component "^0.2.0"
+    strict-uri-encode "^2.0.0"
+
 querystring-es3@^0.2.0:
   version "0.2.1"
   resolved "https://registry.npmjs.org/querystring-es3/-/querystring-es3-0.2.1.tgz#9ec61f79049875707d69414596fd907a4d711e73"
@@ -5800,6 +5811,10 @@ stream-http@^2.7.2:
 stream-shift@^1.0.0:
   version "1.0.0"
   resolved "https://registry.npmjs.org/stream-shift/-/stream-shift-1.0.0.tgz#d5c752825e5367e786f78e18e445ea223a155952"
+
+strict-uri-encode@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.npmjs.org/strict-uri-encode/-/strict-uri-encode-2.0.0.tgz#b9c7330c7042862f6b142dc274bbcc5866ce3546"
 
 string-width@^1.0.1, string-width@^1.0.2:
   version "1.0.2"

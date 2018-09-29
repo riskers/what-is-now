@@ -14,12 +14,13 @@ class App extends Component {
    */
   config: Config = {
     pages: [
-      'pages/Home/index'
+      'pages/Home/index',
+      'pages/Desc/index'
     ],
     window: {
       backgroundTextStyle: 'light',
       navigationBarBackgroundColor: '#fff',
-      navigationBarTitleText: '现在几点',
+      navigationBarTitleText: 'What\'s Now',
       navigationBarTextStyle: 'black'
     }
   }

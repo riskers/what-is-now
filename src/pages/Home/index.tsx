@@ -1,22 +1,15 @@
 import Taro, { Component } from '@tarojs/taro'
 import { View } from '@tarojs/components'
 import { AtList, AtListItem, AtToast } from 'taro-ui'
+import { stringify } from 'query-string'
 import Q from '../../utils/Q'
 import { formatTime } from '../../utils/helpers'
 import './index.less'
-
-interface IWhen {
-  id: string;
-  time: string;
-  art: string;
-  author: string;
-  comment: string;
-  source: string;
-}
+import { IWhen } from '../../typings/local'
 
 interface IState {
   queryTime: string;
-  list: IWhen[];
+  list: IWhen;
   err: string;
 }
 
@@ -69,6 +62,12 @@ export default class Index extends Component<{}, IState> {
     })
   }
 
+  onNavToDesc = (item: IWhen) => {
+    Taro.navigateTo({
+      url: `/pages/Desc/index?${stringify(item)}`
+    })
+  }
+
   render () {
     const {
       queryTime,
@@ -77,8 +76,8 @@ export default class Index extends Component<{}, IState> {
     } = this.state
 
     return (
-      <View className='index'>
-        <View className='main-title'>
+      <View className='home at-article'>
+        <View className='main-title at-article__h3'>
           现在是 {queryTime}
         </View>
 
@@ -92,7 +91,7 @@ export default class Index extends Component<{}, IState> {
                     arrow='right'
                     note={item.author}
                     title={item.art}
-                    extraText='查看详情'
+                    onClick={this.onNavToDesc.bind(this, item)}
                   />
                 )
               })
